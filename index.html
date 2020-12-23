@@ -16,6 +16,9 @@
           <div id="unity-progress-bar-full"></div>
         </div>
       </div>
+      <div id="unity-mobile-warning">
+        WebGL builds are not supported on mobile devices.
+      </div>
       <div id="unity-footer">
         <div id="unity-webgl-logo"></div>
         <div id="unity-fullscreen-button"></div>
@@ -24,12 +27,12 @@
     </div>
     <script>
       var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/MeteoInferno.loader.js";
+      var loaderUrl = buildUrl + "/MeteoInfernoBuild.loader.js";
       var config = {
-        dataUrl: buildUrl + "/MeteoInferno.data.unityweb",
-        frameworkUrl: buildUrl + "/MeteoInferno.framework.js.unityweb",
-        codeUrl: buildUrl + "/MeteoInferno.wasm.unityweb",
-        symbolsUrl: buildUrl + "/MeteoInferno.symbols.json.unityweb",
+        dataUrl: buildUrl + "/MeteoInfernoBuild.data.unityweb",
+        frameworkUrl: buildUrl + "/MeteoInfernoBuild.framework.js.unityweb",
+        codeUrl: buildUrl + "/MeteoInfernoBuild.wasm.unityweb",
+        symbolsUrl: buildUrl + "/MeteoInfernoBuild.symbols.json.unityweb",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "Luchianno",
         productName: "Meteo-Inferno",
@@ -41,10 +44,15 @@
       var loadingBar = document.querySelector("#unity-loading-bar");
       var progressBarFull = document.querySelector("#unity-progress-bar-full");
       var fullscreenButton = document.querySelector("#unity-fullscreen-button");
+      var mobileWarning = document.querySelector("#unity-mobile-warning");
 
       if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
         container.className = "unity-mobile";
         config.devicePixelRatio = 1;
+        mobileWarning.style.display = "block";
+        setTimeout(() => {
+          mobileWarning.style.display = "none";
+        }, 5000);
       } else {
         canvas.style.width = "800px";
         canvas.style.height = "600px";
