@@ -1,0 +1,14 @@
+{
+    "navigationFallback": {
+      "rewrite": "index.html",
+      "exclude": ["/images/*.{png,jpg,gif}", "/css/*"]
+    },
+
+    "mimeTypes": {
+        ".json": "text/json",
+        ".data.br":"application/octet-stream",
+        ".wasm.br":"application/wasm",
+        ".js.br":"application/javascript",
+        ".symbols.json.br":"application/octet-stream"
+    }
+}
