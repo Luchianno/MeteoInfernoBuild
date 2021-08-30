@@ -5,6 +5,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>DynamoSim</title>
+    <link rel="stylesheet" href="bars.css">
 	<style>
 		html,
 		body {
@@ -41,10 +42,19 @@
 </head>
 
 <body>
+	<div class="progress">
+		<div id="progress-bar" class="bar shadow aztec"></div>
+	</div>
 	<div id="gameContainer">
 		<canvas id="unity-canvas" data-pixel-art=""></canvas>
 		<script src="Build/MeteoInfernoBuild.loader.js"></script>
 		<script>
+
+			function onLoadingProgress(progress) {
+                var bar = document.getElementById("progress-bar");
+                bar.style.width = `${(progress*100.0/0.9)}%`;
+			}
+
 			createUnityInstance(document.querySelector("#unity-canvas"), {
 				dataUrl: "Build/MeteoInfernoBuild.data.br",
 				frameworkUrl: "Build/MeteoInfernoBuild.framework.js.br",
@@ -54,7 +64,11 @@
 				companyName: "Luchianno",
 				productName: "DynamoSim",
 				productVersion: "0.2",
-			}).then(function (instance) {
+			}, 
+			onLoadingProgress).then(function (instance) {
+				var bar = document.getElementById("progress-bar");
+				bar.style.display = "none";
+
 				var canvas = instance.Module.canvas;
 				var container = canvas.parentElement;
 				function onResize() {
